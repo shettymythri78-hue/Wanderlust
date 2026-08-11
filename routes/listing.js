@@ -5,13 +5,17 @@ const ExpressError=require("../utilites/ExpressError");
 const {listingSchema}=require("../schema.js");
 const Listing=require("../models/listing.js");
 const {isLoggedIn,isOwner,validateListing}=require("../middleware.js");
-
-
 const listingController=require("../controllers/listing.js");
+const multer  = require('multer');
+const {storage}=require("../cloudconfig.js");
+const upload = multer({ storage });
 
 router.route("/")
 .get(wrapAsync (listingController.index))
-.post(validateListing,wrapAsync(listingController.renderCreateForm)); 
+.post(isLoggedIn,
+    validateListing,
+    upload.single('listing[image]'),
+    wrapAsync(listingController.renderCreateForm)); 
 
 //New Route
 router.get("/new", isLoggedIn,listingController.renderNewForm);
@@ -20,7 +24,9 @@ router.get("/new", isLoggedIn,listingController.renderNewForm);
 router
 .route("/:id")
 .get(wrapAsync(listingController.renderShowForm))
-.put(isLoggedIn,validateListing, isOwner,wrapAsync
+.put(isLoggedIn,isOwner,
+     upload.single('listing[image]'), 
+     validateListing,wrapAsync
 (listingController.renderUpdateForm ))
 .delete(isLoggedIn,isOwner,wrapAsync( listingController.renderDeleteForm));
 

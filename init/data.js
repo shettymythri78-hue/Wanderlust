@@ -8,7 +8,8 @@ const sampleListing=[
     },
     price: 12000,
     location: "Goa",
-    country: "India"
+    country: "India",
+    category:"Rooms"
     },
     {
     title: "Mountain Cabin",
@@ -19,7 +20,8 @@ const sampleListing=[
     },
     price: 8000,
     location: "Manali",
-    country: "India"
+    country: "India",
+    category:"moutains"
     },
     {
     title: "Lake View Cottage",
@@ -30,7 +32,8 @@ const sampleListing=[
     },
     price: 9000,
     location: "Nainital",
-    country: "India"
+    country: "India",
+    category:"Farms"
   },
   {
     title: "Desert Camp",
@@ -41,7 +44,8 @@ const sampleListing=[
     },
     price: 5000,
     location: "Jaisalmer",
-    country: "India"
+    country: "India",
+    category:"New"
   },
   {
     title: "Heritage Palace",
@@ -52,7 +56,8 @@ const sampleListing=[
     },
     price: 18000,
     location: "Jaipur",
-    country: "India"
+    country: "India",
+    category:"Farms"
   },
   {
     title: "Forest Retreat",
@@ -63,7 +68,8 @@ const sampleListing=[
     },
     price: 7000,
     location: "Coorg",
-    country: "India"
+    country: "India",
+    category:"castles"
   },
   {
     title: "Tea Garden Bungalow",
@@ -74,7 +80,8 @@ const sampleListing=[
     },
     price: 8500,
     location: "Munnar",
-    country: "India"
+    country: "India",
+    category:"Domes"
   },
   {
     title: "Beach Resort",
@@ -85,7 +92,8 @@ const sampleListing=[
     },
     price: 15000,
     location: "Kovalam",
-    country: "India"
+    country: "India",
+    category:"Arctic"
   },
   {
     title: "Hill Station Homestay",
@@ -96,7 +104,8 @@ const sampleListing=[
 },
     price: 4000,
     location: "Ooty",
-    country: "India"
+    country: "India",
+    category:"Domes"
   },
   {
     title: "Luxury Penthouse",
@@ -107,7 +116,8 @@ const sampleListing=[
     },
     price: 20000,
     location: "Mumbai",
-    country: "India"
+    country: "India",
+    category:"Arctic"
   },
   {
     title: "Backwater Houseboat",
@@ -118,7 +128,8 @@ const sampleListing=[
     },
     price: 10000,
     location: "Alleppey",
-    country: "India"
+    country: "India",
+    category:"Camping"
   },
   {
     title: "Snow View Chalet",
@@ -129,7 +140,8 @@ const sampleListing=[
     },
     price: 9500,
     location: "Shimla",
-    country: "India"
+    country: "India",
+    category:"Iconic Citier"
   },
   {
     title: "Luxury Farmhouse",
@@ -140,7 +152,8 @@ const sampleListing=[
     },
     price: 11000,
     location: "Pune",
-    country: "India"
+    country: "India",
+    category:"Trending"
   },
   {
     title: "Island Cottage",
@@ -151,7 +164,8 @@ const sampleListing=[
     },
     price: 13000,
     location: "Andaman",
-    country: "India"
+    country: "India",
+     category:"Iconic Citier"
   },
   {
     title: "Riverfront Villa",
@@ -162,7 +176,8 @@ const sampleListing=[
     },
     price: 9800,
     location: "Rishikesh",
-    country: "India"
+    country: "India",
+  category:"Domes"
   },
   {
     title: "Luxury Treehouse",
@@ -173,7 +188,8 @@ const sampleListing=[
     },
     price: 8500,
     location: "Wayanad",
-    country: "India"
+    country: "India",
+    category:"Farms"
   },
   {
     title: "Temple Town Stay",
@@ -184,7 +200,8 @@ const sampleListing=[
     },
     price: 3500,
     location: "Madurai",
-    country: "India"
+    country: "India",
+     category:"Iconic Citier"
   },
 ];
 module.exports={data:sampleListing};

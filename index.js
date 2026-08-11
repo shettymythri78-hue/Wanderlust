@@ -1,3 +1,7 @@
+if(process.env.NODE_ENV !="production"){
+require('dotenv').config();
+}
+
 const express=require("express");
 const app=express();
 const mongoose=require("mongoose");
@@ -7,6 +11,7 @@ const ejsMate=require("ejs-mate");
 const ExpressError=require("./utilites/ExpressError");
 const cookieParser=require("cookie-parser");
 const session=require("express-session");
+const MongoStore = require("connect-mongo");
 const flash=require("connect-flash");
 const passport=require("passport");
 const LocalStartegy=require("passport-local");
@@ -15,15 +20,18 @@ const User=require("./models/user.js");
 const listingsRouter=require("./routes/listing.js");
 const reviewsRouter=require("./routes/review.js");
 const userRouter = require("./routes/user.js");
+ const dbUrl=process.env.ATLASDB_URL;
+ async function main(){
+    await mongoose.connect(dbUrl);
+    console.log("connected to db");
+}
 
 main().then(()=>{
     console.log("connection sucessfully");
 }).catch((err)=>{
     console.log(err);
 });
-async function main(){
-    await mongoose.connect('mongodb://127.0.0.1:27017/wanderlust');
-}
+
 
 app.set("view engine","ejs");
 app.set("views",path.join(__dirname,"views"));
@@ -33,8 +41,20 @@ app.engine('ejs',ejsMate);
 app.use(express.static(path.join(__dirname,"/public")));
 
 
+
+const store = MongoStore.create({ mongoUrl:dbUrl,
+crypto:{
+secret:process.env.SECRET
+},
+touchAfter:24*3600,
+   })
+   store.on("error",()=>{
+console.log("ERROR IN MONGO SESSION STORE ",err)
+});
+
 const sessionOption={
-secret:"mysupersecretcode",
+ store,
+secret:process.env.SECRET,
 resave:false,
 saveUninitialized:true,
 cookie:{
@@ -43,13 +63,6 @@ cookie:{
     httpOnly:true,
 },
 };
-
-
-//root working
-app.get("/",(req,res)=>{
-res.send("root is working in server");
-});
-
 app.use(session(sessionOption));
 app.use(flash());
 
@@ -69,14 +82,6 @@ app.use((req,res,next)=>{
     next();
 });
 
-// app.get("/demoUser",async(req,res)=>{
-//     let fakeUser=new User({
-//         email:"raghushetty19@gmail.com",
-//         username:"Raghu"
-//     });
-//   let registerUser= await user.register(fakeUser,"Shetty@19");
-//   res.send(registerUser);
-// });
 
 //listing and reviews
 app.use("/listings",listingsRouter);
@@ -84,10 +89,7 @@ app.use("/listings/:id/reviews",reviewsRouter);
 app.use("/",userRouter);
 
 
-//For all roots
-// app.all("/{*splat}",(req,res,next)=>{
-//     next(new ExpressError(400,"page is not founded !"));
-// });
+
 //Middleware
 app.use((err, req, res, next) => {
     console.log(err.message);   
@@ -99,15 +101,3 @@ app.listen(8080,()=>{
     console.log("server is working in a port :8080");
 });
 
-// app.get("/testListing",async(req,res)=>{
-//     let sampleListing=new Listing({
-//         title:"Beautiful moutian view",
-//         description:"Near by mountains",
-//         price:1300,
-//         location:"Nandi Hills ,Karnataka",
-//         country:"India",
-//     });
-//     await sampleListing.save();
-//     console.log("sample was saved");
-//     res.send("success");
-// });

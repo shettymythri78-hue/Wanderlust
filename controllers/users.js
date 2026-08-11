@@ -35,7 +35,7 @@ module.exports.logInForm=async(req,res)=>{
 res.redirect(redirectUrl);
 }
 
-module.exports.logOutForm=(req,res,err)=>{
+module.exports.logOutForm=(req,res,next,err)=>{
     req.logout((err)=>{
         if(err){
           next(err);  

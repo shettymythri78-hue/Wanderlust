@@ -27,6 +27,12 @@
     </div>
     <br>
     </div>
+
+    <!-- map  -->
+<h4>Where you'll be</h4>
+<div id="map" ></div>
+ </div>
+
     <% if(currentUser && listing.owner._id.equals(currentUser._id)){%>
     <div class="btns">
 <a href="/listings/<%=listing._id%>/edit" class="btn btn-dark  offset-3 edit-btn">Edit</a>
@@ -38,8 +44,10 @@
     </div>
     <%}%>
 
-
     
+
+
+<!-- review section -->
  <div class="col-8 offset-3 mb-3" >
     <hr>
     <%if(currentUser) {%>
@@ -123,4 +131,13 @@
 </div>
  </div>
     </div>
+    <script>
+    const listingLocation = "<%= listing.location %>";
+    const listingCountry = "<%= listing.country %>";
+    console.log("current listing location:",listingLocation);
+</script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+
+    <script src="/js/map.js"></script>
 

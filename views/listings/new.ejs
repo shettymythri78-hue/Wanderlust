@@ -3,7 +3,7 @@
         <div class="col-8 offset-2">
             <h3>Create New Listing</h3>
     <br><br>
-    <form method="POST" action="/listings" novalidate class="needs-validation">
+    <form method="POST" action="/listings" novalidate class="needs-validation" enctype="multipart/form-data">
         <div class="mb-3">
       <label for="title" class="form-label">title</label>
         
@@ -30,9 +30,10 @@
              </div>
          </div>
           
+         
          <div class="mb-3">
-             <label for="image" class="form-label">Image</label>
-      <input name="listing[image][url]" placeholder="enter image URL/LINK" type="url" class="form-control">
+             <label for="image" class="form-label">Upload Image</label>
+      <input name="listing[image]"  type="file" class="form-control" required>
          </div>
          
           <div class="row">
@@ -55,13 +56,30 @@
         </div>
          </div>
         
-         <div class="mb-3"
-        >  <label for="location" class="form-label">Location</label>
+         <div class="mb-3">  
+            <label for="location" class="form-label">Location</label>
             <input name="listing[location]" placeholder="enter location" type="text"class="form-control" required>
        <div class="invalid-feedback">
          please enter should be location valid
         </div>
         </div>
+        <div class="mb-3">
+    <label for="category" class="form-label">Category</label>
+
+    <select name="listing[category]" class="form-control" required>
+        <option value="">Select Category</option>
+        <option value="trending">Trending</option>
+        <option value="rooms">Rooms</option>
+        <option value="Iconic Cities">Iconic Cities</option>
+        <option value="mountains">Mountains</option>
+        <option value="castles">Castles</option>
+        <option value="camping">Camping</option>
+        <option value="farms">Farms</option>
+        <option value="arctic">Arctic</option>
+        <option value="Domes">Domes</option>
+        <option value="new">New</option>
+    </select>
+</div>
         <br><br>
            <button class="btn btn-dark edit-btn">Add</button>
          <br><br>
