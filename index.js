@@ -42,13 +42,13 @@ app.use(express.static(path.join(__dirname,"/public")));
 
 
 
-const store = MongoStore.create({ mongoUrl:dbUrl,
+const store = MongoStore.create({ mongoUrl:process.env.ATLASDB_URL,
 crypto:{
 secret:process.env.SECRET
 },
 touchAfter:24*3600,
    })
-   store.on("error",()=>{
+   store.on("error",(rrr)=>{
 console.log("ERROR IN MONGO SESSION STORE ",err)
 });
 
@@ -82,6 +82,10 @@ app.use((req,res,next)=>{
     next();
 });
 
+
+app.get("/", (req, res) => {
+    res.redirect("/listings");
+});
 
 //listing and reviews
 app.use("/listings",listingsRouter);
