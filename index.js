@@ -48,7 +48,7 @@ secret:process.env.SECRET
 },
 touchAfter:24*3600,
    })
-   store.on("error",(rrr)=>{
+   store.on("error",(err)=>{
 console.log("ERROR IN MONGO SESSION STORE ",err)
 });
 
@@ -96,7 +96,7 @@ app.use("/",userRouter);
 
 //Middleware
 app.use((err, req, res, next) => {
-    console.log(err.message);   
+    console.log(err.stack);   
 let { status = 400, message = "Something went wrong!" } = err;
     res.status(status).render("error.ejs", { message });
 });
