@@ -30,6 +30,7 @@ req.flash("error","you are not owner of the listing!")
 next();
 }
 module.exports.validateListing=(req,res,next)=>{
+    console.log("BODY FROM FORM:", req.body);
 let {error}=listingSchema.validate(req.body);
  if(error){
     let  errMsg=error.details.map((el)=>el.message).join(",");

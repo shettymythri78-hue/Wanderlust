@@ -40,11 +40,11 @@ app.use(methodoverride("_method"));
 app.engine('ejs',ejsMate);
 app.use(express.static(path.join(__dirname,"/public")));
 
-
-
+console.log("SESSION_SECRET exists:", !!process.env.SESSION_SECRET);
+console.log("RENDER SESSION SECRET:", !!process.env.SESSION_SECRET);
 const store = MongoStore.create({ mongoUrl:process.env.ATLASDB_URL,
 crypto:{
-secret:process.env.SECRET
+secret:process.env.SESSION_SECRET
 },
 touchAfter:24*60*60,
    })
@@ -54,7 +54,7 @@ console.log("ERROR IN MONGO SESSION STORE ",err)
 
 const sessionOption={
  store,
-secret:process.env.SECRET,
+secret:process.env.SESSION_SECRET,
 resave:false,
 saveUninitialized:true,
 cookie:{
