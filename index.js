@@ -43,10 +43,10 @@ app.use(express.static(path.join(__dirname,"/public")));
 
 
 const store = MongoStore.create({ mongoUrl:process.env.ATLASDB_URL,
-// crypto:{
-// secret:process.env.SECRET
-// },
-// touchAfter:24*3600,
+crypto:{
+secret:process.env.SECRET
+},
+touchAfter:24*60*60,
    })
    store.on("error",(err)=>{
 console.log("ERROR IN MONGO SESSION STORE ",err)
